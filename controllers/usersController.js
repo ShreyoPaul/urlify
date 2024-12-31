@@ -1,5 +1,6 @@
-import prisma from '../DB/connectionDB.js';
-import { hashPassword, generateJWT, comparePassword } from '../utils/authenticate.js';
+const prisma = require('../DB/connectionDB');
+const { hashPassword, generateJWT, comparePassword } = require('../utils/authenticate');
+
 
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
@@ -48,4 +49,4 @@ const registerUser = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser };
+module.exports = { loginUser, registerUser };

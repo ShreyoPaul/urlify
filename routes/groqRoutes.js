@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import { handlerGroq } from '../controllers/groqControllers.js';
-import { authenticate } from '../utils/authenticate.js';
+const { Router } = require('express');
+const { handlerGroq } = require('../controllers/groqControllers');
+const { authenticate } = require('../utils/authenticate');
 
 const router = Router();
 
 router.get('/', authenticate, handlerGroq);
 
-export default router;
+module.exports =  router;

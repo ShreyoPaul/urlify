@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { generateShortURL, getAllURLInfo, handleRedirectUrl, handleUrlAnalytics } from '../controllers/shorturlControllers.js';
+const { Router } = require('express');
+const { generateShortURL, getAllURLInfo, handleRedirectUrl, handleUrlAnalytics } = require('../controllers/shorturlControllers');
 
 const router = Router()
 
@@ -12,4 +12,4 @@ router.get('/:uid', handleRedirectUrl);
 router.get('/analytics/:uid', handleUrlAnalytics);
 
 
-export default router;
+module.exports =  router;

@@ -1,11 +1,12 @@
-import dotenv from 'dotenv'
-import Groq from "groq-sdk";
+const dotenv = require('dotenv');
+const Groq = require('groq-sdk');
+
 
 dotenv.config();
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-export async function getSummerization(content) {
+async function getSummerization(content) {
     return groq.chat.completions.create({
         messages: [
             {
@@ -26,9 +27,9 @@ export async function getSummerization(content) {
             },
         ],
         model: "llama3-8b-8192",
-        
+
     });
 
 }
 
-export default getSummerization;
+module.exports = getSummerization;

@@ -1,5 +1,6 @@
-import prisma from "../DB/connectionDB.js"
-import generateShortUID from "../utils/shortIdGenerator.js"
+const prisma = require('../DB/connectionDB');
+const generateShortUID = require('../utils/shortIdGenerator');
+
 
 const getAllURLInfo = async (req, res) => {
     try {
@@ -114,4 +115,4 @@ const handleUrlAnalytics = async (req, res) => {
     }
 }
 
-export { generateShortURL, handleRedirectUrl, getAllURLInfo, handleUrlAnalytics }
+module.exports =  { generateShortURL, handleRedirectUrl, getAllURLInfo, handleUrlAnalytics }

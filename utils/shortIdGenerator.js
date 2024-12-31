@@ -7,4 +7,4 @@ function generateShortUID(length = 8) {
     return result;
 }
 
-export default generateShortUID
+module.exports =  generateShortUID

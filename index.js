@@ -1,11 +1,9 @@
-import dotenv from 'dotenv'
-import express from 'express'
-import cors from 'cors'
-import groqRouter from './routes/groqRoutes.js'
-import urlshortnerRouter from './routes/shorturlRoutes.js'
-import authRouter from './routes/authRoutes.js'
-
-dotenv.config()
+require("dotenv").config()
+const express = require('express');
+const cors = require('cors');
+const groqRouter = require('./routes/groqRoutes');
+const urlshortnerRouter = require('./routes/shorturlRoutes');
+const authRouter = require('./routes/authRoutes');
 
 const app = express()
 app.use(express.json())

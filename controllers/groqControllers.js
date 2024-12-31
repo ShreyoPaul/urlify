@@ -1,5 +1,5 @@
-import fetchContent from "../utils/fetchContent.js";
-import getSummerization  from "../utils/getSummerization.js";
+const { fetchContent } = require('../utils/fetchContent');
+const getSummerization = require('../utils/getSummerization');
 
 const handlerGroq = async (req, res) => {
     try {
@@ -8,7 +8,7 @@ const handlerGroq = async (req, res) => {
         const content = await fetchContent(url);
         const summerization = await getSummerization(content.slice(0, 1000));
         const points = summerization.choices[0].message.content.split("\n").filter((point, i) => {
-            return point.trim() !== ""  && typeof parseInt(point[0]) === "number";
+            return point.trim() !== "" && typeof parseInt(point[0]) === "number";
         });
         res.json({ message: "success", data: points });
         // return res.json({ message: "success", data: content });
@@ -20,4 +20,4 @@ const handlerGroq = async (req, res) => {
 
 
 
-export { handlerGroq };
+module.exports =  { handlerGroq };
