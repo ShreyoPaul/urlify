@@ -4,6 +4,6 @@ const { authenticate } = require('../utils/authenticate');
 
 const router = Router();
 
-router.get('/', authenticate, handlerGroq);
+router.post('/', authenticate, handlerGroq);
 
 module.exports =  router;
