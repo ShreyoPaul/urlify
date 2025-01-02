@@ -7,6 +7,7 @@ const handlerGroq = async (req, res) => {
         console.log(url);
         const content = await fetchContent(url);
         const summerization = await getSummerization(content.slice(0, 1000));
+        console.log(content);
         const points = summerization.choices[0].message.content.split("\n").filter((point, i) => {
             return point.trim() !== "" && typeof parseInt(point[0]) === "number";
         });
