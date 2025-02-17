@@ -105,7 +105,7 @@ const handleUrlAnalytics = async (req, res) => {
 
         if (url) {
             // Redirect to the original URL
-            return res.json({ total_visit: url.visited, visit_history: url.visit_history });
+            return res.json({ total_visit: Number(url.visited), visit_history: url.visit_history });
         } else {
             return res.json({ message: "Url may be corrupted! Make a new one!" });
         }
