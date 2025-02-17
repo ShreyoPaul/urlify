@@ -74,7 +74,7 @@ const handleRedirectUrl = async (req, res) => {
                     id: url.id // It's better to update by the unique `id` rather than `shortUrl`                   
                 },
                 data: {
-                    visited: url.visited + 1,
+                    visited: Number(url.visited) + 1,
                     visit_history
                 }
             });
