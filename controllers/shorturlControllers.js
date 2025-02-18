@@ -18,9 +18,34 @@ const getAllURLInfo = async (req, res) => {
     }
 };
 
+const getAllMyURL = async (req, res) => {
+    try {
+        const allURLs = await prisma.url.findMany({
+            where: {
+                userId: Number(req.user.user.id)
+            }
+        });
+
+        // Convert BigInt values to Number for visited count
+        const formattedURLs = allURLs.map(url => ({
+            shortUrl: url.shortUrl,
+            redirectUrl: url.redirectUrl
+        }));
+
+        console.log("urls: ", formattedURLs);
+
+        return res.status(200).json(formattedURLs);
+    } catch (error) {
+        console.error("Error fetching URLs: ", error);
+        return res.status(500).json({ error: "Failed to fetch URLs" });
+    }
+};
+
 const generateShortURL = async (req, res) => {
     try {
         const { redirectUrl } = req.body;
+
+        console.log(req.user.user.id)
 
         // Validate input
         if (!redirectUrl || typeof redirectUrl !== 'string') {
@@ -38,12 +63,18 @@ const generateShortURL = async (req, res) => {
             data: {
                 shortUrl: uid,
                 redirectUrl,
-                visited: 0,
+                visited: Number(0),
                 visit_history: "",
+                userId: Number(req.user.user.id)
             },
         });
 
-        return res.status(201).json({ newUrlInfo });
+        return res.status(201).json({
+            newUrlInfo: {
+                ...newUrlInfo,
+                visited: Number(newUrlInfo.visited)
+            }
+        });
     } catch (error) {
         console.error('Error creating URL:', error.stack);
         return res.status(500).json({ error: 'Internal server error' });
@@ -115,4 +146,4 @@ const handleUrlAnalytics = async (req, res) => {
     }
 }
 
-module.exports =  { generateShortURL, handleRedirectUrl, getAllURLInfo, handleUrlAnalytics }
+module.exports = { generateShortURL, handleRedirectUrl, getAllURLInfo, handleUrlAnalytics, getAllMyURL }
